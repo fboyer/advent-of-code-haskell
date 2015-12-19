@@ -1,12 +1,24 @@
-module Day1.NotQuiteLisp (getFloor, findBasementIndex) where
+module Day1.NotQuiteLisp (followInstructions, findBasement) where
 
 import           Data.List
 
-getFloor :: String -> Int
-getFloor = foldl' (\floor dir -> if dir == '(' then floor + 1 else floor - 1) 0
+followInstructions :: String -> Int
+followInstructions = foldl' (\f i -> followInstruction f i) 0
 
-findBasementIndex :: Int -> String -> Int
-findBasementIndex index input =
-  case getFloor (take index input) of
-    -1 -> index
-    otherwise -> findBasementIndex (index + 1) input
+followInstruction :: Int -> Char -> Int
+followInstruction f i =
+  case i of
+    '(' -> f + 1
+    ')' -> f - 1
+    otherwise -> f
+
+findBasement :: String -> Maybe Int
+findBasement = findBasement' 0
+
+findBasement' :: Int -> String -> Maybe Int
+findBasement' n i
+  | n > length i = Nothing
+  | otherwise =
+    case followInstructions (take n i) of
+      -1 -> Just n
+      otherwise -> findBasement' (n + 1) i
