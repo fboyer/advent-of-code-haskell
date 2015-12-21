@@ -10,3 +10,4 @@ main = do
   print (findBasement input_day1)
   input_day2 <- readFile "./input/Day2/input.txt"
   print (calcTotalWrappingPaperNeeded input_day2)
+  print (calcTotalRibbonNeeded input_day2)
