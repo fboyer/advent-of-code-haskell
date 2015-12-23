@@ -1,9 +1,9 @@
 module Day1.NotQuiteLisp (followInstructions, findBasement) where
 
-import           Data.List
+import           Data.List as L
 
 followInstructions :: String -> Int
-followInstructions = foldl' (\f i -> followInstruction f i) 0
+followInstructions = L.foldl' (\f i -> followInstruction f i) 0
 
 followInstruction :: Int -> Char -> Int
 followInstruction f i =

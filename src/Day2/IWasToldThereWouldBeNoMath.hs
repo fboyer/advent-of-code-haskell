@@ -1,12 +1,11 @@
 module Day2.IWasToldThereWouldBeNoMath
-    ( Dim(Dim)
-    , calcTotalWrappingPaperNeeded
+    ( calcTotalWrappingPaperNeeded
     , calcTotalRibbonNeeded
     ) where
 
-import           Data.List
-import           Data.List.Split
-import           Data.Maybe
+import           Data.List       as L
+import           Data.List.Split as S
+import           Data.Maybe      as M
 
 data Dim = Dim { w :: Int
                , h :: Int
@@ -14,20 +13,20 @@ data Dim = Dim { w :: Int
                } deriving (Eq, Show)
 
 parseInput :: String -> [Dim]
-parseInput text = mapMaybe (toDim . parseLine) (splitLines text)
+parseInput text = M.mapMaybe (toDim . parseLine) (splitLines text)
 
 splitLines :: String -> [String]
-splitLines = splitOn "\n"
+splitLines = S.splitOn "\n"
 
 parseLine :: String -> [Int]
-parseLine line = map read $ splitOn "x" line
+parseLine line = map read $ S.splitOn "x" line
 
 toDim :: [Int] -> Maybe Dim
 toDim [w, h, d] = Just (Dim w h d)
 toDim _ = Nothing
 
 calcTotalWrappingPaperNeeded :: String -> Int
-calcTotalWrappingPaperNeeded text = foldl' (\t d -> t + calcWrappingPaperNeeded d) 0 (parseInput text)
+calcTotalWrappingPaperNeeded text = L.foldl' (\t d -> t + calcWrappingPaperNeeded d) 0 (parseInput text)
 
 calcWrappingPaperNeeded :: Dim -> Int
 calcWrappingPaperNeeded dim = calcSurfaceArea dim + calcSmallestSurfaceArea dim
@@ -42,7 +41,7 @@ getTwoShortestSides :: Dim -> [Int]
 getTwoShortestSides dim = take 2 $ sort [w dim, h dim, d dim]
 
 calcTotalRibbonNeeded :: String -> Int
-calcTotalRibbonNeeded text = foldl' (\t d -> t + calcRibbonNeeded d) 0 (parseInput text)
+calcTotalRibbonNeeded text = L.foldl' (\t d -> t + calcRibbonNeeded d) 0 (parseInput text)
 
 calcRibbonNeeded :: Dim -> Int
 calcRibbonNeeded dim = calcSmallestPerimeter dim + calcVolume dim

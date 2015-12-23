@@ -17,8 +17,11 @@ library
   hs-source-dirs:      src
   exposed-modules:     Day1.NotQuiteLisp
                        Day2.IWasToldThereWouldBeNoMath
+                       Day3.PerfectlySphericalHousesInAVacuum
   build-depends:       base >= 4.7 && < 5
+                     , hashable
                      , split
+                     , unordered-containers
   default-language:    Haskell2010
 
 executable adventofcode-haskell
