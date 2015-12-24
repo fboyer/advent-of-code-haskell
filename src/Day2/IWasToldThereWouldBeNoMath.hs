@@ -13,10 +13,7 @@ data Dim = Dim { w :: Int
                } deriving (Eq, Show)
 
 parseInput :: String -> [Dim]
-parseInput text = M.mapMaybe (toDim . parseLine) (splitLines text)
-
-splitLines :: String -> [String]
-splitLines = S.splitOn "\n"
+parseInput = M.mapMaybe (toDim . parseLine) . lines
 
 parseLine :: String -> [Int]
 parseLine line = map read $ S.splitOn "x" line
