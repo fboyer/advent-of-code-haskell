@@ -2,7 +2,7 @@ module Main where
 
 import           Day1.NotQuiteLisp
 import           Day2.IWasToldThereWouldBeNoMath
-import Day3.PerfectlySphericalHousesInAVacuum
+import           Day3.PerfectlySphericalHousesInAVacuum
 
 main :: IO ()
 main = do
@@ -13,4 +13,5 @@ main = do
   print (calcTotalWrappingPaperNeeded input_day2)
   print (calcTotalRibbonNeeded input_day2)
   input_day3 <- readFile "./input/Day3/input.txt"
-  print (deliverPresents input_day3)
+  print (visitHouses input_day3)
+  print (visitHouses' input_day3)

@@ -1,5 +1,6 @@
 module Day3.PerfectlySphericalHousesInAVacuum
-    ( deliverPresents
+    ( visitHouses
+    , visitHouses'
     ) where
 
 import           Data.List as L
@@ -8,8 +9,8 @@ data Point = Point { x :: Int
                    , y :: Int
                    } deriving (Eq, Show)
 
-deliverPresents :: String -> Int
-deliverPresents = L.length . L.nub . reverse . L.foldl' (\h dir -> move (head h) dir:h) [Point 0 0]
+visitHouses :: String -> Int
+visitHouses = L.length . L.nub . deliverPresents
 
 move :: Point -> Char -> Point
 move point dir
@@ -18,3 +19,19 @@ move point dir
   | dir == '>' = Point (x point + 1) (y point)
   | dir == '<' = Point (x point - 1) (y point)
   | otherwise = point
+
+visitHouses' :: String -> Int
+visitHouses' i = L.length . L.nub $ deliverPresents (santasRun i) ++ deliverPresents (roboSantasRun i)
+
+deliverPresents :: String -> [Point]
+deliverPresents = L.foldl' (\h dir -> move (head h) dir:h) [Point 0 0]
+
+santasRun :: String -> String
+santasRun [] = []
+santasRun [x] = [x]
+santasRun (x:_:xs) = x:santasRun xs
+
+roboSantasRun :: String -> String
+roboSantasRun [] = []
+roboSantasRun [_] = []
+roboSantasRun (_:x:xs) = x:roboSantasRun xs
