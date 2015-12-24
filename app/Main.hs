@@ -3,6 +3,7 @@ module Main where
 import           Day1.NotQuiteLisp
 import           Day2.IWasToldThereWouldBeNoMath
 import           Day3.PerfectlySphericalHousesInAVacuum
+import Day4.TheIdealStockingStuffer
 
 main :: IO ()
 main = do
@@ -15,3 +16,6 @@ main = do
   input_day3 <- readFile "./input/Day3/input.txt"
   print (visitHouses input_day3)
   print (visitHouses' input_day3)
+  input_day4 <- readFile "./input/Day4/input.txt"
+  print (mineAdventCoin 5 $ init input_day4) -- init is used to trim the newline character that's automatically added by Atom at the end of the input file
+  print (mineAdventCoin 6 $ init input_day4) -- init is used to trim the newline character that's automatically added by Atom at the end of the input file

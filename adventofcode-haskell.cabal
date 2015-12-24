@@ -20,10 +20,9 @@ library
                        Day3.PerfectlySphericalHousesInAVacuum
                        Day4.TheIdealStockingStuffer
   build-depends:       base >= 4.7 && < 5
-                     , hashable
+                     , bytestring
                      , split
                      , pureMD5
-                     , unordered-containers
   default-language:    Haskell2010
 
 executable adventofcode-haskell
